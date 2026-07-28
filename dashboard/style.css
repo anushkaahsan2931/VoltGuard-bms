@@ -1,0 +1,342 @@
+body {
+
+    background-color: #F7F8FA;
+
+}
+
+
+.header {
+
+    padding: 30px;
+
+    border-bottom: 2px solid #D9DEE7;
+
+}
+
+
+.header h1 {
+
+    font-family: Arial, sans-serif;
+
+    font-size: 48px;
+
+    letter-spacing: 6px;
+
+    color: #20252B;
+
+}
+
+
+.header p {
+
+    font-size: 18px;
+
+    color: #667085;
+
+}
+
+
+
+.section-title {
+
+    margin-top: 35px;
+
+    margin-bottom: 15px;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    color: #20252B;
+
+}
+
+
+
+.card {
+
+    background-color: white;
+
+    border: 1px solid #D9DEE7;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+}
+
+
+
+.card h3 {
+
+    color: #667085;
+
+    font-size: 14px;
+
+}
+
+
+
+.big-number {
+
+    font-size: 45px;
+
+    font-weight: bold;
+
+    color: #E87500;
+
+}
+
+
+
+.status-card {
+
+    background-color: white;
+
+    border-left: 8px solid #E87500;
+
+    padding: 25px;
+
+    border-radius: 10px;
+
+}
+
+
+.status-card h2 {
+
+    color: #20252B;
+
+}
+.cell-card {
+
+    background:white;
+
+    border:1px solid #D9DEE7;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+}
+
+
+.cell-card h3 {
+
+    color:#20252B;
+
+    letter-spacing:1px;
+
+}
+
+
+.cell-voltage {
+
+    font-size:32px;
+
+    font-weight:bold;
+
+    color:#E87500;
+
+    margin:15px;
+
+}
+
+
+.cell-card p {
+
+    color:#667085;
+
+}
+
+
+.normal {
+
+    color:#2E7D32 !important;
+
+    font-weight:bold;
+
+}
+.battery-container {
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin:30px;
+
+}
+
+
+.battery-body {
+
+    width:320px;
+
+    height:120px;
+
+    border:5px solid #20252B;
+
+    border-radius:20px;
+
+    padding:8px;
+
+    background:white;
+
+}
+
+
+.battery-level {
+
+    height:100%;
+
+    width:82%;
+
+    background:#E87500;
+
+    border-radius:12px;
+
+}
+
+
+.battery-tip {
+
+    width:18px;
+
+    height:45px;
+
+    background:#20252B;
+
+    border-radius:0 8px 8px 0;
+
+}
+.fault-card {
+
+    background:white;
+
+    border:1px solid #D9DEE7;
+
+    border-radius:15px;
+
+    padding:25px;
+
+    margin-top:20px;
+
+}
+
+
+.fault-card pre {
+
+    font-family:monospace;
+
+    font-size:14px;
+
+    color:#20252B;
+
+}
+.fault-summary {
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:25px;
+
+    margin-bottom:20px;
+
+}
+
+
+.cell-check {
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:15px;
+
+    margin-bottom:12px;
+
+}
+
+.brand-header {
+
+    width: 100%;
+
+    text-align: center;
+
+    margin-bottom: 40px;
+
+}
+
+
+.brand-header h1 {
+
+    font-size: 60px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    margin: 0;
+
+    text-align: center;
+
+    transform: translateX(18px);
+
+}
+
+
+.subtitle {
+
+    font-size: 22px;
+
+    font-weight: 500;
+
+    margin-top: 12px;
+
+    text-align: center;
+
+}
+
+
+.tagline {
+
+    font-size: 16px;
+
+    color: #5C636A;
+
+    margin-top: 8px;
+
+    text-align: center;
+
+}
+.normal {
+
+    color: #2E8B57;
+
+    font-weight:700;
+
+}
+
+
+.warning {
+
+    color:#D97706;
+
+    font-weight:700;
+
+}
+
+
+.critical {
+
+    color:#DC2626;
+
+    font-weight:700;
+
+}

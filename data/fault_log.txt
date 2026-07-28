@@ -1,0 +1,12 @@
+===== FAULT MONITORING REPORT =====
+
+[OK] Cell 1 Temperature Normal
+[OK] Cell 1 Voltage Normal
+[OK] Cell 2 Temperature Normal
+[OK] Cell 2 Voltage Normal
+[OK] Cell 3 Temperature Normal
+[OK] Cell 3 Voltage Normal
+[FAULT] Cell 4: Over Temperature (70.05 C)
+[OK] Cell 4 Voltage Normal
+
+SYSTEM STATUS: FAULTS DETECTED
