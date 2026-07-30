@@ -46,7 +46,7 @@ with open(css_path) as f:
         f"<style>{f.read()}</style>",
         unsafe_allow_html=True
     )
-    )
+    
 
 
 # Load telemetry data
