@@ -1,11 +1,15 @@
 import streamlit as st
 import pandas as pd
 import os
-from PIL import Image
+from streamlit_autorefresh import st_autorefresh
 
 st.set_page_config(
     page_title="VoltGuard",
     layout="wide"
+)
+st_autorefresh(
+    interval=3000,
+    key="soc_refresh"
 )
 
 st.markdown(
@@ -59,60 +63,62 @@ elif st.session_state.test_mode == "imbalance":
 
     data.loc[3, "Voltage"] = 4.10
     data.loc[0, "Voltage"] = 3.40
-# BMS Test Mode
 
-st.markdown(
-"""
-<div class="section-title">
-BMS TEST MODE
-</div>
-""",
-unsafe_allow_html=True
+# Dynamic SOC simulation
+
+if "current_soc" not in st.session_state:
+    st.session_state.current_soc = data["SOC"].mean()
+
+
+if "mode" not in st.session_state:
+    st.session_state.mode = "Charging"
+
+
+
+# Update SOC based on operating mode
+
+if st.session_state.mode == "Charging":
+
+    st.session_state.current_soc += 0.1
+
+
+elif st.session_state.mode == "Discharging":
+
+    st.session_state.current_soc -= 0.1
+
+
+# Keep SOC between 0 and 100
+
+st.session_state.current_soc = max(
+    0,
+    min(100, st.session_state.current_soc)
 )
-
-
-if "test_mode" not in st.session_state:
-    st.session_state.test_mode = "normal"
-
-
-col1, col2, col3, col4 = st.columns(4)
-
-
-with col1:
-
-    if st.button("Normal Operation"):
-        st.session_state.test_mode = "normal"
-
-
-with col2:
-
-    if st.button("Inject Over Temperature"):
-        st.session_state.test_mode = "temperature"
-
-
-with col3:
-
-    if st.button("Inject Over Voltage"):
-        st.session_state.test_mode = "voltage"
-
-
-with col4:
-
-    if st.button("Create Imbalance"):
-        st.session_state.test_mode = "imbalance"
-
-if st.button("Reset System"):
-
-    st.session_state.test_mode = "normal"
-
-    st.rerun()
 # Calculate battery statistics
 
-average_soc = data["SOC"].mean()
-
+average_soc = st.session_state.current_soc
 average_voltage = data["Voltage"].mean()
 
 average_temperature = data["Temperature"].mean()
+
+# Dynamic current and power simulation
+
+if st.session_state.mode == "Charging":
+
+    current = 25
+    power_flow = (average_voltage * len(data) * current) / 1000
+
+
+elif st.session_state.mode == "Discharging":
+
+    current = -18
+    power_flow = (average_voltage * len(data) * current) / 1000
+
+
+else:
+
+    current = 0
+    power_flow = 0
+
 # Pack calculations
 
 highest_voltage = data["Voltage"].max()
@@ -144,22 +150,53 @@ if os.path.exists(status_file):
 else:
 
     system_status = "NO STATUS AVAILABLE"
-# Load fault log
 
-fault_file = "../data/fault_log.txt"
+st.caption(
+f"Operating Mode: {st.session_state.mode}"
+)
+
+st.markdown(
+f"""
+<div class="status-card">
+
+<h3>
+Operating Mode: {st.session_state.mode}
+</h3>
+
+</div>
+""",
+unsafe_allow_html=True
+)
+
+st.markdown(
+"""
+<div class="section-title">
+OPERATING MODE
+</div>
+""",
+unsafe_allow_html=True
+)
 
 
-if os.path.exists(fault_file):
-
-    with open(fault_file, "r") as file:
-        fault_log = file.read()
-
-else:
-
-    fault_log = "NO FAULT DATA AVAILABLE"
+mode1, mode2, mode3 = st.columns(3)
 
 
+with mode1:
 
+    if st.button(" Charging"):
+        st.session_state.mode = "Charging"
+
+
+with mode2:
+
+    if st.button(" Discharging"):
+        st.session_state.mode = "Discharging"
+
+
+with mode3:
+
+    if st.button("⏸ Idle"):
+        st.session_state.mode = "Idle"
 # Battery Overview
 
 st.markdown(
@@ -192,7 +229,7 @@ unsafe_allow_html=True
 )
 
 
-col1, col2, col3, col4 = st.columns(4)
+col1, col2, col3, col4, col5, col6 = st.columns(6)
 
 
 with col1:
@@ -263,7 +300,88 @@ with col4:
     """,
     unsafe_allow_html=True
     )
+with col5:
 
+    st.markdown(
+    f"""
+    <div class="card">
+
+    <h3>CURRENT</h3>
+
+    <div class="big-number">
+    {current:.1f} A
+    </div>
+
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
+
+
+with col6:
+
+    st.markdown(
+    f"""
+    <div class="card">
+
+    <h3>POWER FLOW</h3>
+
+    <div class="big-number">
+    {power_flow:.2f} kW
+    </div>
+
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
+
+# BMS Test Mode
+
+st.markdown(
+"""
+<div class="section-title">
+BMS TEST SIMULATION
+</div>
+""",
+unsafe_allow_html=True
+)
+
+
+if "test_mode" not in st.session_state:
+    st.session_state.test_mode = "normal"
+
+st.write("")
+col1, col2, col3, col4 = st.columns(4)
+
+
+with col1:
+
+    if st.button("Normal Operation"):
+        st.session_state.test_mode = "normal"
+
+
+with col2:
+
+    if st.button("Inject Over Temperature"):
+        st.session_state.test_mode = "temperature"
+
+
+with col3:
+
+    if st.button("Inject Over Voltage"):
+        st.session_state.test_mode = "voltage"
+
+
+with col4:
+
+    if st.button("Create Imbalance"):
+        st.session_state.test_mode = "imbalance"
+
+if st.button("Reset System"):
+
+    st.session_state.test_mode = "normal"
+
+    st.rerun()
 # Cell Monitoring
 
 st.markdown(
@@ -454,23 +572,31 @@ unsafe_allow_html=True
 )
 
 
-fault_status = "NO CRITICAL FAULTS"
+# Check the current telemetry for faults
+
+fault_detected = False
+
+for index, row in data.iterrows():
+
+    if (
+        row["Temperature"] >= 60
+        or row["Voltage"] >= 4.2
+        or row["Voltage"] <= 3.0
+    ):
+
+        fault_detected = True
+        break
 
 
-if "FAULTS DETECTED" in fault_log:
+if fault_detected:
 
     fault_status = "FAULT DETECTED"
-
-
-if fault_status == "NO CRITICAL FAULTS":
-
-    status_icon = "🟢"
+    status_icon = "🔴"
 
 else:
 
-    status_icon = "🔴"
-
-
+    fault_status = "NO CRITICAL FAULTS"
+    status_icon = "🟢"
 
 st.markdown(
 f"""

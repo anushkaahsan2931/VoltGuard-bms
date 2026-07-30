@@ -340,3 +340,89 @@ body {
     font-weight:700;
 
 }
+
+/* BMS Test Mode Buttons */
+
+div.stButton > button {
+
+    background-color: #ff8c00;
+    color: white;
+
+    border: none;
+
+    border-radius: 10px;
+
+    padding: 12px 20px;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    width: 100%;
+
+    transition: all 0.2s ease;
+
+}
+
+
+div.stButton > button:hover {
+
+    background-color: #e67e00;
+
+    color: white;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0px 5px 12px rgba(255,140,0,0.35);
+
+}
+
+
+div.stButton > button:active {
+
+    transform: translateY(1px);
+
+}
+
+.warning {
+    color: #D4A017 !important;   /* Dark amber/yellow */
+    font-weight: 600;
+}
+
+.critical {
+    color: #C0392B !important;   /* Dark red */
+    font-weight: 600;
+}
+
+.normal {
+    color: #27AE60 !important;   /* Professional green */
+    font-weight: 600;
+}
+
+.stButton > button {
+
+    background-color: #d97706;
+    color: white;
+
+    border-radius: 8px;
+
+    border: none;
+
+    height: 45px;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    width: 100%;
+
+}
+
+
+.stButton > button:hover {
+
+    background-color: #b45309;
+
+    color: white;
+
+}
