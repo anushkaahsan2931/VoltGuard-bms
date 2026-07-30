@@ -17,6 +17,32 @@ Experience the VoltGuard Battery Management System dashboard:
 🚀 **Live Dashboard:**  
 https://voltguard-bms-dashboard.streamlit.app/
 
+## Dashboard Preview
+
+### Battery Pack Overview
+
+![Battery Pack Overview](assets/Batterypack_overview.png)
+
+
+### Cell Monitoring & BMS Test Mode
+
+![Cell Monitoring and BMS Test](assets/cell-array-monitoring%26bms_test.png)
+
+
+### Battery Health Summary & Telemetry Analysis
+
+![Battery Health Summary and Telemetry Graphs](assets/battery-health-summary%26telemetry_graphs.png)
+
+
+### Fault Detection Simulation
+
+![Fault Detection Simulation](assets/fault-detection-simulation.png)
+
+
+### Cell Safety Check
+
+![Cell Safety Check](assets/cell_safety_check.png)
+
 # Project Overview
 
 Modern electric vehicles rely on Battery Management Systems to ensure battery safety, performance, and longevity.
