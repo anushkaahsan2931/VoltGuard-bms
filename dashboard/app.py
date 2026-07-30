@@ -35,15 +35,27 @@ unsafe_allow_html=True
 
 
 # Load custom styling
-with open("style.css") as f:
+
+css_path = os.path.join(
+    os.path.dirname(__file__),
+    "style.css"
+)
+
+with open(css_path) as f:
     st.markdown(
         f"<style>{f.read()}</style>",
         unsafe_allow_html=True
     )
+    )
 
 
 # Load telemetry data
-data = pd.read_csv("../data/telemetry.csv")
+data_path = os.path.join(
+    os.path.dirname(__file__),
+    "../data/telemetry.csv"
+)
+
+data = pd.read_csv(data_path)
 
 if "test_mode" not in st.session_state:
     st.session_state.test_mode = "normal"
@@ -139,7 +151,10 @@ pack_voltage = average_voltage * len(data)
 estimated_energy = pack_voltage * 2.5
 # Load BMS status
 
-status_file = "../data/status.txt"
+status_file = os.path.join(
+    os.path.dirname(__file__),
+    "../data/status.txt"
+)
 
 
 if os.path.exists(status_file):
