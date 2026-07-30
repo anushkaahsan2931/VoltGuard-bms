@@ -12,10 +12,10 @@ Built with Python and Streamlit, VoltGuard demonstrates the integration of elect
 
 ## Live Demo
 
-🚀 **Live Dashboard:**
-(Add your Streamlit deployment link here)
+Experience the VoltGuard Battery Management System dashboard:
 
----
+🚀 **Live Dashboard:**  
+https://voltguard-bms-dashboard.streamlit.app/
 
 # Project Overview
 
